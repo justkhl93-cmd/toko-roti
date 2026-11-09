@@ -34,6 +34,8 @@ export async function POST(request) {
     httpOnly: true,
     path: "/",
     maxAge: 60 * 60 * 8,
+    sameSite: "lax",
+    secure: process.env.NODE_ENV === "production",
   });
 
   return Response.json({ role: user.role });
