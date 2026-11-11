@@ -1,8 +1,11 @@
 import { cookies } from "next/headers";
 
-export async function POST(request) {
+export async function POST() {
   const cookieStore = await cookies();
   cookieStore.delete("token");
 
-  return Response.redirect(new URL("/login", request.url), 303);
+  return new Response(null, {
+    status: 303,
+    headers: { Location: "/login" },
+  });
 }
