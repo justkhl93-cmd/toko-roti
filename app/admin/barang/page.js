@@ -127,7 +127,63 @@ export default function ProdukPage() {
         )}
       </form>
 
-      <div className="bg-white rounded-xl shadow overflow-x-auto">
+      {/* Tampilan HP: kartu per produk */}
+      <div className="md:hidden space-y-3">
+        {list.map((b) => (
+          <div key={b.kode} className="bg-white rounded-xl shadow p-3">
+            <div className="flex gap-3">
+              {b.gambar ? (
+                <img src={b.gambar} alt={b.nama}
+                  className="w-16 h-16 object-cover rounded-lg shrink-0" />
+              ) : (
+                <div className="w-16 h-16 rounded-lg bg-green-50 flex items-center justify-center text-emerald-400 shrink-0">
+                  <Package size={24} />
+                </div>
+              )}
+              <div className="min-w-0 flex-1">
+                <div className="font-semibold leading-tight">{b.nama}</div>
+                <div className="text-sm text-gray-500">{b.kode}</div>
+                <div className="mt-1 flex items-center justify-between gap-2">
+                  <span className="text-emerald-700 font-semibold">{rupiah(b.harga)}</span>
+                  <span className={"text-sm " + (b.stok <= 10 ? "text-red-600 font-semibold" : "text-gray-600")}>
+                    Stok: {b.stok}
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-3 grid grid-cols-3 gap-2 text-center text-sm">
+              <label className="inline-flex items-center justify-center gap-1 py-2 rounded-lg bg-emerald-50 text-emerald-700 cursor-pointer">
+                <Camera size={14} />
+                Foto
+                <input
+                  type="file"
+                  accept="image/png,image/jpeg,image/webp"
+                  className="hidden"
+                  onChange={(e) => {
+                    uploadFoto(b.kode, e.target.files[0]);
+                    e.target.value = "";
+                  }}
+                />
+              </label>
+              <button onClick={() => edit(b)} className="py-2 rounded-lg bg-blue-50 text-blue-600">
+                Edit
+              </button>
+              <button onClick={() => hapus(b)} className="py-2 rounded-lg bg-red-50 text-red-600">
+                Hapus
+              </button>
+            </div>
+          </div>
+        ))}
+        {list.length === 0 && (
+          <p className="bg-white rounded-xl shadow p-4 text-center text-gray-500">
+            Belum ada produk
+          </p>
+        )}
+      </div>
+
+      {/* Tampilan laptop: tabel */}
+      <div className="hidden md:block bg-white rounded-xl shadow overflow-x-auto">
         <table className="w-full text-left">
           <thead className="bg-green-100">
             <tr>
