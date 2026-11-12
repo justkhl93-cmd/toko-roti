@@ -206,7 +206,7 @@ export default function KasirClient({ nama }) {
                     )}
                   </div>
 
-                  <div className="mt-2 flex justify-between gap-2">
+                  <div className="mt-2 flex flex-col sm:flex-row sm:justify-between gap-1 sm:gap-2">
                     <div className="font-semibold leading-tight">{p.nama}</div>
                     <div className="text-emerald-700 font-semibold whitespace-nowrap">
                       {rupiah(p.harga)}
@@ -214,12 +214,12 @@ export default function KasirClient({ nama }) {
                   </div>
                   <div className="text-sm text-gray-500">{p.kode}</div>
 
-                  <div className="mt-auto pt-2 flex items-center justify-between">
-                    <span className="text-sm text-gray-500">Stok: {p.stok}</span>
+                  <div className="mt-auto pt-2 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                                       <span className="text-sm text-gray-500">Stok: {p.stok}</span>
                     <button
                       onClick={() => tambah(p)}
                       disabled={p.stok <= 0}
-                      className="bg-emerald-400 hover:bg-emerald-500 disabled:bg-gray-300 disabled:cursor-not-allowed text-white px-4 py-1.5 rounded-lg"
+                      className="bg-emerald-400 hover:bg-emerald-500 disabled:bg-gray-300 disabled:cursor-not-allowed text-white px-4 w-full sm:w-auto py-2 sm:py-1.5 rounded-lg"
                     >
                       Tambah
                     </button>
